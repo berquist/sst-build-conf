@@ -11,6 +11,8 @@ dir_install="${PWD}"/install_cmake_noflags_nodeps
 
     # -DCMAKE_C_COMPILER_LAUNCHER=ccache \
     # -DCMAKE_CXX_COMPILER_LAUNCHER=ccache \
+ompi_loc="$(spack location -i openmpi@4.1.5 ~internal-pmix %apple-clang@14.0.3)"
+export MPI_HOME="${ompi_loc}"
 cmake \
     -GNinja \
     -DCMAKE_EXPORT_COMPILE_COMMANDS=1 \
