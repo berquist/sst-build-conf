@@ -9,6 +9,8 @@ dir_install="${PWD}"/install_cmake_noflags_nodeps
 \rm -rf "${dir_build}" || true
 # \rm -rf "${dir_install}" || true
 
+    # -DCMAKE_C_COMPILER_LAUNCHER=ccache \
+    # -DCMAKE_CXX_COMPILER_LAUNCHER=ccache \
 cmake \
     -GNinja \
     -DCMAKE_EXPORT_COMPILE_COMMANDS=1 \
