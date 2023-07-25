@@ -2,9 +2,11 @@
 
 set -euo pipefail
 
+suffix=autotools_flags_nodeps
+
 dir_src="${PWD}/sst-core"
-dir_build="${PWD}"/sst-core-build-autotools-flags-nodeps
-dir_install="${PWD}"/install_autotools_flags_nodeps
+dir_build="${PWD}"/sst-core-build-${suffix}
+dir_install="${PWD}"/install_${suffix}
 
 \rm -rf "${dir_build}" || true
 # \rm -rf "${dir_install}" || true

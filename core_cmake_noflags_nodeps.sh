@@ -2,9 +2,11 @@
 
 set -euo pipefail
 
+suffix=cmake_noflags_nodeps
+
 dir_src="${PWD}/sst-core"
-dir_build="${PWD}"/sst-core-cmake-noflags-nodeps
-dir_install="${PWD}"/install_cmake_noflags_nodeps
+dir_build="${PWD}"/sst-core-build-${suffix}
+dir_install="${PWD}"/install_${suffix}
 
 \rm -rf "${dir_build}" || true
 # \rm -rf "${dir_install}" || true
