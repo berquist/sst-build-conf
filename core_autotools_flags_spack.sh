@@ -2,6 +2,9 @@
 
 set -euo pipefail
 
+SCRIPTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+source "${SCRIPTDIR}"/source_compilers_mpi.bash
+
 suffix=autotools_noflags_spack
 
 dir_src="${PWD}/sst-core"
@@ -18,8 +21,6 @@ popd
 mkdir -p "${dir_build}"
 pushd "${dir_build}"
 
-export CC=/usr/bin/clang
-export CXX=/usr/bin/clang++
 spack_tree="${SPACK_ENV}/.spack-env/view"
 # The Spack env bin/ is already on the PATH.
 export CPPFLAGS="-I${spack_tree}/include"

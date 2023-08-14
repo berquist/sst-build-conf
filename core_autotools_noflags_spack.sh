@@ -5,7 +5,7 @@ set -euo pipefail
 SCRIPTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 source "${SCRIPTDIR}"/source_compilers_mpi.bash
 
-suffix=autotools_noflags_nodeps
+suffix=autotools_noflags_spack
 
 dir_src="${PWD}/sst-core"
 dir_build="${PWD}"/sst-core-build-${suffix}
@@ -25,3 +25,6 @@ pushd "${dir_build}"
             --prefix="${dir_install}"
 
 bear -- make install -j12
+
+# To run, you *must* do `spack load hdf5`, otherwise the rpath for HDF5 in
+# sstsim.x won't be set properly.

@@ -2,12 +2,17 @@
 
 set -euo pipefail
 
+SCRIPTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+source "${SCRIPTDIR}"/source_compilers_nompi.bash
+
+suffix=autotools_noflags_nodeps
+
 dir_src="${PWD}"/sst-elements
-dir_build="${PWD}"/sst-elements-build-autotools-noflags-nodeps
-dir_core="${PWD}"/install_autotools_noflags_nodeps
+dir_build="${PWD}"/sst-elements-build-${suffix}
+dir_core="${PWD}"/install_${suffix}
 dir_install="${dir_core}"
 
-# \rm -rf "${dir_build}" || true
+\rm -rf "${dir_build}" || true
 # \rm -rf "${dir_install}" || true
 
 pushd "${dir_src}"
@@ -17,9 +22,6 @@ popd
 mkdir -p "${dir_build}"
 pushd "${dir_build}"
 
-# export PATH="${HOMEBREW_PREFIX}/opt/ccache/libexec:${PATH}"
-export CC=/usr/bin/clang
-export CXX=/usr/bin/clang++
 "${dir_src}"/configure \
     --prefix="${dir_install}" \
     --with-sst-core="${dir_core}"

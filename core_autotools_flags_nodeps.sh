@@ -2,6 +2,9 @@
 
 set -euo pipefail
 
+SCRIPTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+source "${SCRIPTDIR}"/source_compilers_mpi.bash
+
 suffix=autotools_flags_nodeps
 
 dir_src="${PWD}/sst-core"
@@ -18,12 +21,6 @@ popd
 mkdir -p "${dir_build}"
 pushd "${dir_build}"
 
-export CC=/usr/bin/clang
-export CXX=/usr/bin/clang++
-ompi_loc="$(spack location -i openmpi@4.1.5 ~internal-pmix %apple-clang@14.0.3)"
-export MPICC="${ompi_loc}"/bin/mpicc
-export MPICXX="${ompi_loc}"/bin/mpicxx
-export CPPFLAGS="-I${ompi_loc}/include"
 "${dir_src}"/configure \
             --prefix="${dir_install}" \
             --enable-perf-tracking \
