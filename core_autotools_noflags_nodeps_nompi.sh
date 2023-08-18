@@ -22,6 +22,7 @@ mkdir -p "${dir_build}"
 pushd "${dir_build}"
 
 "${dir_src}"/configure \
+            --disable-mpi \
             --prefix="${dir_install}"
 
 bear -- make install -j16
