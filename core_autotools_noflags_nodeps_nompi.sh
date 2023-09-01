@@ -3,9 +3,14 @@
 set -euo pipefail
 
 SCRIPTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-source "${SCRIPTDIR}"/source_compilers_nompi.bash
+source "${SCRIPTDIR}"/compilers.bash
 
-suffix=autotools_noflags_nodeps_nompi
+toolchain="${1}"
+# flags="${2}"
+
+source_compilers_nompi "${toolchain}"
+
+suffix=autotools_noflags_nodeps_nompi_${toolchain}
 
 dir_src="${PWD}/sst-core"
 dir_build="${PWD}"/sst-core-build-${suffix}
@@ -21,6 +26,7 @@ popd
 mkdir -p "${dir_build}"
 pushd "${dir_build}"
 
+# CFLAGS="${flags}" CXXFLAGS="${flags}" \
 "${dir_src}"/configure \
             --disable-mpi \
             --prefix="${dir_install}"

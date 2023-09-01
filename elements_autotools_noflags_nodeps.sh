@@ -3,9 +3,13 @@
 set -euo pipefail
 
 SCRIPTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-source "${SCRIPTDIR}"/source_compilers_nompi.bash
+source "${SCRIPTDIR}"/compilers.bash
 
-suffix=autotools_noflags_nodeps
+toolchain="${1}"
+
+source_compilers_mpi "${toolchain}"
+
+suffix=autotools_noflags_nodeps_${toolchain}
 
 dir_src="${PWD}"/sst-elements
 dir_build="${PWD}"/sst-elements-build-${suffix}

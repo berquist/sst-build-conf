@@ -2,6 +2,8 @@
 
 set -euo pipefail
 
+# TODO update to use common compiler setting
+
 suffix=cmake_noflags_spack
 
 dir_src="${PWD}/sst-core"
