@@ -31,4 +31,4 @@ pushd "${dir_build}"
     --with-sst-core="${dir_core}" \
     --prefix="${dir_install}"
 
-bear -- make install -j16
+make install -j16

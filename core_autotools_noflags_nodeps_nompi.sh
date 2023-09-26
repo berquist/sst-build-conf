@@ -28,8 +28,9 @@ mkdir -p "${dir_build}"
 pushd "${dir_build}"
 
 # CFLAGS="${flags}" CXXFLAGS="${flags}" \
+# CXXFLAGS="-g -O1 -stdlib=libc++" \
 "${dir_src}"/configure \
             --disable-mpi \
             --prefix="${dir_install}"
 
-bear -- make install -j16
+make install -j16
