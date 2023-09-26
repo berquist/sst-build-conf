@@ -21,6 +21,7 @@ dir_install="${dir_core}"
 # \rm -rf "${dir_install}" || true
 
 pushd "${dir_src}"
+git clean -Xdf .
 ./autogen.sh
 popd
 
