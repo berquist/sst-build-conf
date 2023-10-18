@@ -32,4 +32,5 @@ pushd "${dir_build}"
             --enable-event-tracking \
             --enable-profile
 
-bear -- make install -j12
+bear -- make install -j16
+ln -fsv "${dir_build}"/compile_commands.json "${dir_src}"/compile_commands.json

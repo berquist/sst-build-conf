@@ -26,5 +26,6 @@ cmake \
     -DCMAKE_INSTALL_PREFIX="${dir_install}"
 
 pushd "${dir_build}"
-ninja install
+cmake --build "${dir_build}"
+cmake --install "${dir_build}"
 popd

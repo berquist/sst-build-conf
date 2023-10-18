@@ -52,7 +52,8 @@ pushd "${dir_build}"
     --with-ramulator="$(spack location -i ramulator)" \
     --with-sst-core="${dir_core}"
 
-bear -- make install -j12
+bear -- make install -j16
+ln -fsv "${dir_build}"/compile_commands.json "${dir_src}"/compile_commands.json
 
 # To run, you *must* do `spack load hdf5`, otherwise the rpath for HDF5 in
 # sstsim.x won't be set properly.

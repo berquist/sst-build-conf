@@ -30,4 +30,5 @@ pushd "${dir_build}"
             --disable-mpi \
             --prefix="${dir_install}"
 
-make install -j16
+bear -- make install -j16
+ln -fsv "${dir_build}"/compile_commands.json "${dir_src}"/compile_commands.json
