@@ -26,11 +26,11 @@ popd
 mkdir -p "${dir_build}"
 pushd "${dir_build}"
 
-"${dir_src}"/configure \
-            --prefix="${dir_install}" \
-            --enable-perf-tracking \
-            --enable-event-tracking \
-            --enable-profile
+INSTALL="$(command -v install) -p" "${dir_src}"/configure \
+       --prefix="${dir_install}" \
+       --enable-perf-tracking \
+       --enable-event-tracking \
+       --enable-profile
 
 bear -- make install -j16
 ln -fsv "${dir_build}"/compile_commands.json "${dir_src}"/compile_commands.json

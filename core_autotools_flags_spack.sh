@@ -29,12 +29,12 @@ pushd "${dir_build}"
 spack_tree="${SPACK_ENV}/.spack-env/view"
 # The Spack env bin/ is already on the PATH.
 export CPPFLAGS="-I${spack_tree}/include"
-"${dir_src}"/configure \
-            --prefix="${dir_install}" \
-            --with-hdf5="$(spack location -i hdf5)" \
-            --enable-event-tracking \
-            --enable-perf-tracking \
-            --enable-profile
+INSTALL="$(command -v install) -p" "${dir_src}"/configure \
+       --prefix="${dir_install}" \
+       --with-hdf5="$(spack location -i hdf5)" \
+       --enable-event-tracking \
+       --enable-perf-tracking \
+       --enable-profile
 
 bear -- make install -j16
 ln -fsv "${dir_build}"/compile_commands.json "${dir_src}"/compile_commands.json

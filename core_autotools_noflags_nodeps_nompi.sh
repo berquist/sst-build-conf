@@ -29,9 +29,9 @@ pushd "${dir_build}"
 
 # CFLAGS="${flags}" CXXFLAGS="${flags}" \
 # CXXFLAGS="-g -O1 -stdlib=libc++" \
-"${dir_src}"/configure \
-            --disable-mpi \
-            --prefix="${dir_install}"
+INSTALL="$(command -v install) -p" "${dir_src}"/configure \
+      --disable-mpi \
+      --prefix="${dir_install}"
 
 bear -- make install -j16
 ln -fsv "${dir_build}"/compile_commands.json "${dir_src}"/compile_commands.json

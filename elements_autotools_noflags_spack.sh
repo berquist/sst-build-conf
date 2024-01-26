@@ -43,14 +43,14 @@ pushd "${dir_build}"
 # problem with env view
 # --with-hybridsim="$(spack location -i hybridsim)" \
 
-"${dir_src}"/configure \
-    --prefix="${dir_install}" \
-    --with-dramsim="$(spack location -i dramsim2)" \
-    --with-goblin-hmcsim="$(spack location -i goblin-hmc-sim)" \
-    --with-hbmdramsim="$(spack location -i hbm-dramsim2)" \
-    --with-nvdimmsim="$(spack location -i nvdimmsim)" \
-    --with-ramulator="$(spack location -i ramulator)" \
-    --with-sst-core="${dir_core}"
+INSTALL="$(command -v install) -p" "${dir_src}"/configure \
+       --prefix="${dir_install}" \
+       --with-dramsim="$(spack location -i dramsim2)" \
+       --with-goblin-hmcsim="$(spack location -i goblin-hmc-sim)" \
+       --with-hbmdramsim="$(spack location -i hbm-dramsim2)" \
+       --with-nvdimmsim="$(spack location -i nvdimmsim)" \
+       --with-ramulator="$(spack location -i ramulator)" \
+       --with-sst-core="${dir_core}"
 
 bear -- make install -j16
 ln -fsv "${dir_build}"/compile_commands.json "${dir_src}"/compile_commands.json

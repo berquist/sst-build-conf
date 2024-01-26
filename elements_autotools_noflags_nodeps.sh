@@ -27,9 +27,13 @@ popd
 mkdir -p "${dir_build}"
 pushd "${dir_build}"
 
-"${dir_src}"/configure \
-    --prefix="${dir_install}" \
-    --with-sst-core="${dir_core}"
+# [ -n "${INTEL_PIN_DIRECTORY}" ] && PIN_TEXT="--with-pin=${INTEL_PIN_DIRECTORY}" || PIN_TEXT="--without-pin"
+PIN_TEXT="--without-pin"
+INSTALL="$(command -v install) -p" "${dir_src}"/configure \
+       "${PIN_TEXT}" \
+       --prefix="${dir_install}" \
+       --with-sst-core="${dir_core}"
 
-bear -- make install -j16
+# bear -- make install -j16
+make install -j16
 ln -fsv "${dir_build}"/compile_commands.json "${dir_src}"/compile_commands.json
