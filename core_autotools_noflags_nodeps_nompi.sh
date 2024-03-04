@@ -6,7 +6,6 @@ SCRIPTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 source "${SCRIPTDIR}"/compilers.bash
 
 toolchain="${1}"
-# flags="${2}"
 
 source_compilers_nompi "${toolchain}"
 
@@ -27,11 +26,11 @@ popd
 mkdir -p "${dir_build}"
 pushd "${dir_build}"
 
-# CFLAGS="${flags}" CXXFLAGS="${flags}" \
-# CXXFLAGS="-g -O1 -stdlib=libc++" \
 INSTALL="$(command -v install) -p" "${dir_src}"/configure \
-      --disable-mpi \
-      --prefix="${dir_install}"
+       --disable-mpi \
+       --prefix="${dir_install}"
 
 bear -- make install -j16
 ln -fsv "${dir_build}"/compile_commands.json "${dir_src}"/compile_commands.json
+# no installation available
+make html
