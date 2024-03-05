@@ -33,4 +33,4 @@ INSTALL="$(command -v install) -p" "${dir_src}"/configure \
 bear -- make install -j16
 ln -fsv "${dir_build}"/compile_commands.json "${dir_src}"/compile_commands.json
 # no installation available
-make html
+# make html
