@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-suffix=cmake_noflags_nodeps_nompi
+suffix=cmake_noflags_nodeps
 
 dir_src="${PWD}/sst-core"
 dir_build="${PWD}"/sst-core-build-${suffix}
@@ -16,7 +16,6 @@ cmake \
     -DCMAKE_EXPORT_COMPILE_COMMANDS=1 \
     -B"${dir_build}" \
     -S"${dir_src}/experimental" \
-    -DSST_DISABLE_MPI=ON \
     -DCMAKE_INSTALL_PREFIX="${dir_install}"
 
 pushd "${dir_build}"
