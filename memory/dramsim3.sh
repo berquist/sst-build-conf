@@ -14,6 +14,7 @@ cmake \
     -DCMAKE_EXPORT_COMPILE_COMMANDS=1 \
     -DCMAKE_INSTALL_PREFIX="${dir_install}" \
     -DBUILD_SHARED_LIBS=1
-pushd "${dir_build}"
-ninja
-popd
+cmake --build "${dir_build}"
+ln -fsv "${dir_build}"/compile_commands.json "${PWD}"/compile_commands.json
+cmake --install "${dir_build}"
+# ctest --test-dir "${dir_build}"
