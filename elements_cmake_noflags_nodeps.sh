@@ -2,16 +2,16 @@
 
 set -euo pipefail
 
+suffix=cmake_noflags_nodeps
+
 dir_src="${PWD}"/sst-elements
-dir_build="${PWD}"/sst-elements-cmake-noflags-nodeps
-dir_core="${PWD}"/install_cmake_noflags_nodeps
+dir_build="${PWD}"/sst-elements-build-${suffix}
+dir_core="${PWD}"/install_${suffix}
 dir_install="${dir_core}"
 
 \rm -rf "${dir_build}" || true
 # \rm -rf "${dir_install}" || true
 
-    # -DCMAKE_C_COMPILER_LAUNCHER=ccache \
-    # -DCMAKE_CXX_COMPILER_LAUNCHER=ccache \
 cmake \
     -GNinja \
     -DCMAKE_EXPORT_COMPILE_COMMANDS=1 \
@@ -22,3 +22,8 @@ cmake \
     -DCMAKE_INSTALL_PREFIX="${dir_install}"
 
 # No building while CMake infrastructure is still in development.
+# pushd "${dir_build}"
+# cmake --build "${dir_build}"
+# cmake --install "${dir_build}"
+# popd
+# ln -fsv "${dir_build}"/compile_commands.json "${dir_src}"/compile_commands.json
