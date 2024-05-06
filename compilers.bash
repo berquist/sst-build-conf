@@ -7,36 +7,28 @@ source_compilers_nompi() {
 
     case "${toolchain}" in
         clang)
-            export CC=$(command -v clang)
-            export CXX=$(command -v clang++)
+            CC=$(command -v clang)
+            CXX=$(command -v clang++)
             ;;
         gnu)
-            export CC=$(command -v gcc)
-            export CXX=$(command -v g++)
+            CC=$(command -v gcc)
+            CXX=$(command -v g++)
             ;;
         *)
             exit 1
             ;;
     esac
+
+    export CC
+    export CXX
 }
 
 source_compilers_mpi() {
     local toolchain="${1}"
 
+    source_compilers_nompi "${toolchain}"
+
     local ompi_version="4.1.5"
-    case "${toolchain}" in
-        clang)
-            export CC=$(command -v clang)
-            export CXX=$(command -v clang++)
-            ;;
-        gnu)
-            export CC=$(command -v gcc)
-            export CXX=$(command -v g++)
-            ;;
-        *)
-            exit 1
-            ;;
-    esac
     local ompi_loc
     ompi_loc="$(spack location -i openmpi@${ompi_version} %${SPACK_COMPILER_SPEC})"
     export MPICC="${ompi_loc}"/bin/mpicc
