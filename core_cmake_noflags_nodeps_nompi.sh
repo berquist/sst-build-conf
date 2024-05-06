@@ -2,6 +2,13 @@
 
 set -euo pipefail
 
+SCRIPTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+source "${SCRIPTDIR}"/compilers.bash
+
+toolchain="${1}"
+
+source_compilers_no_mpi "${toolchain}"
+
 suffix=cmake_noflags_nodeps_nompi
 
 dir_src="${PWD}/sst-core"
