@@ -9,7 +9,7 @@ toolchain="${1}"
 
 source_compilers_mpi "${toolchain}"
 
-suffix=cmake_noflags_spack
+suffix=cmake_noflags_spack_${toolchain}
 
 dir_src="${PWD}/sst-core"
 dir_build="${PWD}"/sst-core-build-${suffix}
@@ -34,3 +34,4 @@ pushd "${dir_build}"
 cmake --build "${dir_build}"
 cmake --install "${dir_build}"
 popd
+ln -fsv "${dir_build}"/compile_commands.json "${dir_src}"/compile_commands.json

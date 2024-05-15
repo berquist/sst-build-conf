@@ -9,7 +9,7 @@ toolchain="${1}"
 
 source_compilers_no_mpi "${toolchain}"
 
-suffix=cmake_noflags_nodeps_nompi
+suffix=cmake_noflags_nodeps_nompi_${toolchain}
 
 dir_src="${PWD}/sst-core"
 dir_build="${PWD}"/sst-core-build-${suffix}

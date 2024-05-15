@@ -32,5 +32,5 @@ INSTALL="$(command -v install) -p" "${dir_src}"/configure \
        --enable-event-tracking \
        --enable-profile
 
-bear -- make install -j16
+bear -- make install -j$(nproc)
 ln -fsv "${dir_build}"/compile_commands.json "${dir_src}"/compile_commands.json

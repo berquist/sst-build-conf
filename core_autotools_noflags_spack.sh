@@ -29,7 +29,7 @@ pushd "${dir_build}"
 INSTALL="$(command -v install) -p" "${dir_src}"/configure \
        --prefix="${dir_install}"
 
-bear -- make install -j16
+bear -- make install -j$(nproc)
 ln -fsv "${dir_build}"/compile_commands.json "${dir_src}"/compile_commands.json
 
 # To run, you *must* do `spack load hdf5`, otherwise the rpath for HDF5 in
