@@ -28,6 +28,7 @@ pushd "${dir_build}"
 
 INSTALL="$(command -v install) -p" "${dir_src}"/configure \
        --disable-mpi \
+       --with-python="${PYENV_ROOT}"/versions/3.11.7/bin/python-config \
        --prefix="${dir_install}"
 
 $(command -v bear) -- make install -j$(nproc)
