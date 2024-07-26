@@ -7,7 +7,7 @@ source "${SCRIPTDIR}"/compilers.bash
 
 toolchain="${1}"
 
-source_compilers_no_mpi "${toolchain}"
+source_compilers_nompi "${toolchain}"
 
 suffix=cmake_noflags_nodeps_nompi_${toolchain}
 
