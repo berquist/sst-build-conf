@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -euo pipefail
+set -eo pipefail
 
 dir_src="${PWD}"/sst-elements
 dir_build="${PWD}"/sst-elements-build-spack-cmake
