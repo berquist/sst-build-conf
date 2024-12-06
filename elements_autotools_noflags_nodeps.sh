@@ -31,6 +31,7 @@ pushd "${dir_build}"
 PIN_TEXT="--without-pin"
 INSTALL="$(command -v install) -p" "${dir_src}"/configure \
        "${PIN_TEXT}" \
+       --with-python="${PYENV_ROOT}"/versions/${python_version}/bin/python-config \
        --prefix="${dir_install}" \
        --with-sst-core="${dir_core}"
 

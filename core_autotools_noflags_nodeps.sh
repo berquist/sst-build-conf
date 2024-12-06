@@ -27,6 +27,7 @@ mkdir -p "${dir_build}"
 pushd "${dir_build}"
 
 INSTALL="$(command -v install) -p" "${dir_src}"/configure \
+       --with-python="${PYENV_ROOT}"/versions/${python_version}/bin/python-config \
        --prefix="${dir_install}"
 
 "$(command -v bear)" -- make install -j"$(nproc)"

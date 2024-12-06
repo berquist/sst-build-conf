@@ -28,6 +28,7 @@ mkdir -p "${dir_build}"
 pushd "${dir_build}"
 
 INSTALL="$(command -v install) -p" "${dir_src}"/configure \
+       --with-python="${PYENV_ROOT}"/versions/${python_version}/bin/python-config \
        --with-sst-core="${dir_core}" \
        --prefix="${dir_install}"
 
