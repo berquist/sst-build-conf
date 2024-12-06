@@ -31,7 +31,7 @@ INSTALL="$(command -v install) -p" "${dir_src}"/configure \
        --with-python="${PYENV_ROOT}"/versions/3.11.7/bin/python-config \
        --prefix="${dir_install}"
 
-$(command -v bear) -- make install -j$(nproc)
+"$(command -v bear)" -- make install -j"$(nproc)"
 ln -fsv "${dir_build}"/compile_commands.json "${dir_src}"/compile_commands.json
 # no installation available
 # make html
