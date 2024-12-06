@@ -23,8 +23,3 @@ cmake --build "${dir_build}"
 ln -fsv "${dir_build}"/compile_commands.json "${PWD}"/compile_commands.json
 cmake --install "${dir_build}"
 # ctest --test-dir "${dir_build}"
-
-
-
-
-
