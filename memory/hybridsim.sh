@@ -3,6 +3,7 @@
 set -euo pipefail
 
 SCRIPTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+# shellcheck disable=SC1091
 source "${SCRIPTDIR}"/locations.sh
 
 dir_build="${PWD}"/build
