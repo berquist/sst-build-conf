@@ -52,7 +52,7 @@ if [[ -z "${PYENV_ROOT}" ]]; then
 fi
 
 # shellcheck disable=SC2034
-python_version=3.12.5
+python_version=3.6.15
 
 # Handle the case where the Pin binary is on the path but the SST-specific
 # environment variable needed for the compile and link lines isn't present.
