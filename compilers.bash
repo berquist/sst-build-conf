@@ -47,15 +47,18 @@ source_compilers_mpi() {
     export CPPFLAGS="-I${ompi_loc}/include"
 }
 
+set +u
 if [[ -z "${PYENV_ROOT}" ]]; then
     export PYENV_ROOT="${HOME}"/.pyenv
 fi
+set -u
 
 # shellcheck disable=SC2034
 python_version=3.6.15
 
 # Handle the case where the Pin binary is on the path but the SST-specific
 # environment variable needed for the compile and link lines isn't present.
+set +u
 if [[ -z "${INTEL_PIN_DIRECTORY}" ]]; then
     pinloc="$(command -v pin)"
     if [[ -n "${pinloc}" ]]; then
@@ -63,3 +66,4 @@ if [[ -z "${INTEL_PIN_DIRECTORY}" ]]; then
         export INTEL_PIN_DIRECTORY
     fi
 fi
+set -u
