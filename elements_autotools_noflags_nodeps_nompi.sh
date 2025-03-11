@@ -32,7 +32,9 @@ popd
 mkdir -p "${dir_build}"
 pushd "${dir_build}"
 
+[ -n "${INTEL_PIN_DIRECTORY}" ] && PIN_TEXT="--with-pin=${INTEL_PIN_DIRECTORY}" || PIN_TEXT="--without-pin"
 INSTALL="$(command -v install) -p" "${dir_src}"/configure \
+       "${PIN_TEXT}" \
        --with-python="${PYENV_ROOT}"/versions/${python_version}/bin/python-config \
        --with-sst-core="${dir_core}" \
        --prefix="${dir_install}"
