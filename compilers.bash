@@ -2,54 +2,41 @@
 
 set -eo pipefail
 
-if [[ -z "${SPACK_COMPILER_SPEC}" ]]; then
-    echo "SPACK_COMPILER_SPEC not defined"
-    exit 1
-fi
-
 if ! command -v bear >&/dev/null; then
     echo "bear not found in PATH"
     exit 1
 fi
 
+# To use this, the desired compiler must be registered with Spack (shown under
+# `spack compilers`).  However, it is not `spack load`ed into the environment,
+# but only its CC and CXX paths exported.
 source_compilers_nompi() {
-    local toolchain="${1}"
+    local spack_compiler_spec="${1}"
 
-    case "${toolchain}" in
-        clang)
-            CC=$(command -v clang)
-            CXX=$(command -v clang++)
-            # https://libcxx.llvm.org/Status/Cxx17.html
-            if [[ -n "${CLANG_LIBCXX}" ]]; then
-                export CXXFLAGS="-stdlib=libc++"
-            # else
-                # not strictly necessary, commented out because it will
-                # probably not work properly on Apple Clang
-                # export CXXFLAGS="-stdlib=libstdc++"
-            fi
-            ;;
-        gnu)
-            CC=$(command -v gcc)
-            CXX=$(command -v g++)
-            ;;
-        *)
-            exit 1
-            ;;
-    esac
+    SCRIPTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+    local compiler_paths
+    compiler_paths="$(spack python "${SCRIPTDIR}"/spack_get_compilers.py --spec "${spack_compiler_spec}")"
+    CC="$(echo "${compiler_paths}" | jq -r .cc)"
+    CXX="$(echo "${compiler_paths}" | jq -r .cxx)"
+
+    if [[ -n "${CLANG_LIBCXX}" ]]; then
+        export CXXFLAGS="-stdlib=libc++"
+    fi
 
     export CC
     export CXX
 }
 
 source_compilers_mpi() {
-    local toolchain="${1}"
+    local spack_compiler_spec="${1}"
 
-    source_compilers_nompi "${toolchain}"
+    source_compilers_nompi "${spack_compiler_spec}"
 
     local ompi_version="4.1.5"
     local ompi_loc
     # shellcheck disable=SC2086
-    ompi_loc="$(spack location -i openmpi@${ompi_version} %${SPACK_COMPILER_SPEC})"
+    ompi_loc="$(spack location -i openmpi@${ompi_version} %${spack_compiler_spec})"
     export MPICC="${ompi_loc}"/bin/mpicc
     export MPICXX="${ompi_loc}"/bin/mpicxx
     export CPPFLAGS="-I${ompi_loc}/include"
