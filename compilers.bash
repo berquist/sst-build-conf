@@ -17,7 +17,7 @@ source_compilers_nompi() {
 
     local compiler_paths
     compiler_paths="$(spack python "${SCRIPTDIR}"/spack_get_compilers.py --spec "${spack_compiler_spec}")"
-    CC="$(echo "${compiler_paths}" | jq -r .cc)"
+    CC="$(echo "${compiler_paths}" | jq -r .c)"
     CXX="$(echo "${compiler_paths}" | jq -r .cxx)"
 
     if [[ -n "${CLANG_LIBCXX}" ]]; then
