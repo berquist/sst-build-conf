@@ -14,7 +14,7 @@ toolchain="${1}"
 
 source_compilers_nompi "${toolchain}"
 
-suffix=autotools_noflags_nodeps_nompi_${toolchain}
+suffix="$(clean_suffix autotools_noflags_nodeps_nompi_${toolchain})"
 
 dir_src="${PWD}"/sst-elements
 dir_build="${PWD}"/sst-elements-build-${suffix}

@@ -14,7 +14,7 @@ toolchain="${1}"
 
 source_compilers_nompi "${toolchain}"
 
-suffix=cmake_noflags_nodeps_nompi_${toolchain}
+suffix="$(clean_suffix cmake_noflags_nodeps_nompi_${toolchain})"
 
 dir_src="${PWD}/sst-core"
 dir_build="${PWD}"/sst-core-build-${suffix}

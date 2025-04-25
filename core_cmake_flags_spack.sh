@@ -14,7 +14,7 @@ toolchain="${1}"
 
 source_compilers_mpi "${toolchain}"
 
-suffix=cmake_noflags_spack_${toolchain}
+suffix="$(clean_suffix cmake_noflags_spack_${toolchain})"
 
 dir_src="${PWD}/sst-core"
 dir_build="${PWD}"/sst-core-build-${suffix}

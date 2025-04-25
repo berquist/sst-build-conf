@@ -37,6 +37,14 @@ source_compilers_mpi() {
     export CPPFLAGS="-I${ompi_loc}/include"
 }
 
+# delete '@' and '=' characters if present
+clean_suffix() {
+    local suffix="${1}"
+    local tmp="${suffix//@/}"
+    local cleaned="${tmp//=/}"
+    echo "${cleaned}"
+}
+
 if [[ -z "${PYENV_ROOT}" ]]; then
     export PYENV_ROOT="${HOME}"/.pyenv
 fi

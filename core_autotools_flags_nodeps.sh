@@ -14,7 +14,7 @@ toolchain="${1}"
 
 source_compilers_mpi "${toolchain}"
 
-suffix=autotools_flags_nodeps_${toolchain}
+suffix=$(clean_suffix autotools_flags_nodeps_${toolchain})
 
 dir_src="${PWD}/sst-core"
 dir_build="${PWD}"/sst-core-build-${suffix}
