@@ -2,11 +2,6 @@
 
 set -eo pipefail
 
-if ! command -v bear >&/dev/null; then
-    echo "bear not found in PATH"
-    exit 1
-fi
-
 # To use this, the desired compiler must be registered with Spack (shown under
 # `spack compilers`).  However, it is not `spack load`ed into the environment,
 # but only its CC and CXX paths exported.
@@ -48,6 +43,11 @@ fi
 
 # shellcheck disable=SC2034
 python_version=3.6.15
+
+if ! command -v bear >&/dev/null; then
+    echo "bear not found in PATH"
+    exit 1
+fi
 
 # Handle the case where the Pin binary is on the path but the SST-specific
 # environment variable needed for the compile and link lines isn't present.
