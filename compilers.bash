@@ -50,7 +50,7 @@ if [[ -z "${PYENV_ROOT}" ]]; then
 fi
 
 # shellcheck disable=SC2034
-python_version=3.6.15
+python_version=3.9.17
 
 if ! command -v bear >&/dev/null; then
     echo "bear not found in PATH"
