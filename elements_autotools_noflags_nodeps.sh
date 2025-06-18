@@ -39,5 +39,5 @@ INSTALL="$(command -v install) -p" "${dir_src}"/configure \
        --prefix="${dir_install}" \
        --with-sst-core="${dir_core}"
 
-"$(command -v bear)" -- make install -j"$(nproc)"
+bear_make_install
 ln -fsv "${dir_build}"/compile_commands.json "${dir_src}"/compile_commands.json

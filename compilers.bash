@@ -52,11 +52,6 @@ fi
 # shellcheck disable=SC2034
 python_version=3.9.17
 
-if ! command -v bear >&/dev/null; then
-    echo "bear not found in PATH"
-    exit 1
-fi
-
 # Handle the case where the Pin binary is on the path but the SST-specific
 # environment variable needed for the compile and link lines isn't present.
 if [[ -z "${INTEL_PIN_DIRECTORY}" ]]; then
@@ -66,3 +61,11 @@ if [[ -z "${INTEL_PIN_DIRECTORY}" ]]; then
         export INTEL_PIN_DIRECTORY
     fi
 fi
+
+bear_make_install() {
+    if command -v bear >& /dev/null; then
+        "$(command -v bear)" -- make install -j"$(nproc)"
+    else
+        make install -j"$(nproc)"
+    fi
+}
