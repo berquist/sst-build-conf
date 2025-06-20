@@ -32,7 +32,7 @@ mkdir -p "${dir_build}"
 pushd "${dir_build}"
 
 INSTALL="$(command -v install) -p" "${dir_src}"/configure \
-       --with-python="${PYENV_ROOT}"/versions/${python_version}/bin/python-config \
+       --with-python="${python_config_loc}" \
        --disable-mpi \
        --prefix="${dir_install}"
 

@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# compilers.bash: Common logic for compiling SST, specifically setting up
+# compiler environment variables.
+#
+# Note: some variables appear unused because this file is sourced, not
+# executed, in order to avoid polluting the environment.
+
 set -eo pipefail
 
 # To use this, the desired compiler must be registered with Spack (shown under
@@ -50,7 +56,15 @@ if [[ -z "${PYENV_ROOT}" ]]; then
 fi
 
 # shellcheck disable=SC2034
-python_version=3.9.17
+python_version=3.9.23
+
+if [[ ! -d "${PYENV_ROOT}"/versions/${python_version} ]]; then
+    echo "Python version ${python_version} not installed in pyenv"
+    exit 1
+else
+    # shellcheck disable=SC2034
+    python_config_loc="${PYENV_ROOT}"/versions/${python_version}/bin/python-config
+fi
 
 # Handle the case where the Pin binary is on the path but the SST-specific
 # environment variable needed for the compile and link lines isn't present.
