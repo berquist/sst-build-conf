@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# core_cmake_noflags_nodeps.sh: Compile and install core, using the CMake
+# build system, without explicitly specifying any additional build
+# dependencies at configure time.
+
 # shellcheck disable=SC2086
 # https://web.archive.org/web/20230401201759/https://wiki.bash-hackers.org/scripting/debuggingtips#making_xtrace_more_useful
 export PS4='+(${BASH_SOURCE}:${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
@@ -30,8 +34,6 @@ cmake \
     -S"${dir_src}/experimental" \
     -DCMAKE_INSTALL_PREFIX="${dir_install}"
 
-pushd "${dir_build}"
 cmake --build "${dir_build}"
 cmake --install "${dir_build}"
-popd
 ln -fsv "${dir_build}"/compile_commands.json "${dir_src}"/compile_commands.json
