@@ -34,7 +34,7 @@ source_compilers_mpi() {
 
     source_compilers_nompi "${spack_compiler_spec}"
 
-    local ompi_version="4.1.5"
+    local ompi_version="4.1.8"
     local ompi_loc
     # shellcheck disable=SC2086
     ompi_loc="$(spack location -i openmpi@${ompi_version} %${spack_compiler_spec})"
