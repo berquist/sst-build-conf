@@ -8,10 +8,22 @@ import spack.compilers
 
 
 def get_compiler_specs() -> List[spack.spec.Spec]:
-    all_compiler_specs = spack.compilers.config.all_compilers(
+    supported_compilers = spack.compilers.config.supported_compilers()
+
+    def _is_compiler(x) -> bool:
+        return (
+            x.name in supported_compilers
+            and x.package.supported_languages
+            and not x.external
+        )
+
+    compilers_from_store = [x for x in spack.store.STORE.db.query() if _is_compiler(x)]
+    # scope passed as arg in lib/spack/spack/cmd/compiler.py
+    compilers_from_yaml = spack.compilers.config.all_compilers(
         scope=None, init_config=False
     )
-    return all_compiler_specs
+    compilers = compilers_from_yaml + compilers_from_store
+    return compilers
 
 
 def get_compiler_paths_from_spec(cs: spack.spec.Spec):
@@ -44,6 +56,8 @@ if __name__ == "__main__":
         if not satisfies:
             raise RuntimeError(f"no specs satisfy '{args.spec}'")
         elif len(satisfies) > 1:
-            raise RuntimeError(f"multiple specs satisfy '{args.spec}': {json.dumps(all_paths)}")
+            raise RuntimeError(
+                f"multiple specs satisfy '{args.spec}': {json.dumps(all_paths)}"
+            )
         compiler_paths = all_paths[0]
         print(json.dumps(compiler_paths))
