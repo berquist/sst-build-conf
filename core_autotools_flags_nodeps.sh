@@ -21,7 +21,7 @@ dir_build="${PWD}"/sst-core-build-${suffix}
 dir_install="${PWD}"/install_${suffix}
 
 \rm -rf "${dir_build}" || true
-# \rm -rf "${dir_install}" || true
+\rm -rf "${dir_install}" || true
 
 pushd "${dir_src}"
 git clean -Xdf .
@@ -32,10 +32,13 @@ mkdir -p "${dir_build}"
 pushd "${dir_build}"
 
 INSTALL="$(command -v install) -p" "${dir_src}"/configure \
-       --prefix="${dir_install}" \
        --enable-perf-tracking \
        --enable-event-tracking \
-       --enable-profile
+       --enable-profile \
+       --with-python="${python_config_loc}" \
+       --prefix="${dir_install}"
 
 bear_make_install
 ln -fsv "${dir_build}"/compile_commands.json "${dir_src}"/compile_commands.json
+# no installation available
+# make html
