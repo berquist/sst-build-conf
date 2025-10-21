@@ -3,6 +3,7 @@
 import argparse
 import json
 import sys
+from typing import Dict
 
 import spack
 from packaging.version import parse as parse_version
@@ -11,7 +12,7 @@ SPACK_VERSION = parse_version(spack.__version__)
 if SPACK_VERSION.major < 1:
     import os
     import platform
-    from typing import Any, Dict, Optional
+    from typing import Any, Optional
 
     try:
         import yaml  # PyYAML
@@ -89,7 +90,7 @@ else:
     def get_compiler_specs() -> List[spack.spec.Spec]:
         supported_compilers = spack.compilers.config.supported_compilers()
 
-        def _is_compiler(x) -> bool:
+        def _is_compiler(x: spack.spec.Spec) -> bool:
             return (
                 x.name in supported_compilers
                 and x.package.supported_languages
@@ -103,15 +104,10 @@ else:
         compilers_from_yaml = spack.compilers.config.all_compilers(
             scope=None, init_config=False
         )
-        compilers = compilers_from_yaml + compilers_from_store
-        return compilers
+        return compilers_from_yaml + compilers_from_store
 
-    def get_compiler_paths_from_spec(cs: spack.spec.Spec):
-        nodes = cs.to_dict()["spec"]["nodes"]
-        assert len(nodes) == 1
-        node = nodes[0]
-        compiler_paths = node["external"]["extra_attributes"]["compilers"]
-        return compiler_paths
+    def get_compiler_paths_from_spec(cs: spack.spec.Spec) -> Dict[str, str]:
+        return {"c": cs.package.cc, "cxx": cs.package.cxx, "fc": cs.package.fortran}
 
     def main() -> None:
         parser = argparse.ArgumentParser()
