@@ -18,7 +18,7 @@ repos:
         args: [--fix, "lf"]
       - id: trailing-whitespace
   - repo: https://github.com/google/yamlfmt
-    rev: "v0.17.2"
+    rev: "v0.19.0"
     hooks:
       - id: yamlfmt
   - repo: https://github.com/adrienverge/yamllint
@@ -26,6 +26,6 @@ repos:
     hooks:
       - id: yamllint
   - repo: https://github.com/shellcheck-py/shellcheck-py
-    rev: "v0.10.0.1"
+    rev: "v0.11.0.1"
     hooks:
       - id: shellcheck
