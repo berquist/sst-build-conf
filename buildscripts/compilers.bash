@@ -93,10 +93,22 @@ else
     GPGPUSIM_TEXT=""
 fi
 
-bear_make_install() {
-    if command -v bear >&/dev/null; then
-        "$(command -v bear)" -- make install -j"$(nproc)"
+max_cpus() {
+    local max=${1:-16}
+    local cpu_count
+    cpu_count="$(nproc)"
+
+    if (( cpu_count > max )); then
+        echo "${max}"
     else
-        make install -j"$(nproc)"
+        echo "${cpu_count}"
+    fi
+}
+
+bear_make_install() {
+    if command -v bear >& /dev/null; then
+        "$(command -v bear)" -- make install -j"$(max_cpus)"
+    else
+        make install -j"$(max_cpus)"
     fi
 }
