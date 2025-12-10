@@ -56,7 +56,7 @@ if [[ -z "${PYENV_ROOT}" ]]; then
 fi
 
 # shellcheck disable=SC2034
-python_version=3.9.23
+python_version=3.9.25
 
 if [[ ! -d "${PYENV_ROOT}"/versions/${python_version} ]]; then
     echo "Python version ${python_version} not installed in pyenv"
