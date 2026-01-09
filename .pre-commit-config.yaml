@@ -25,7 +25,24 @@ repos:
     rev: "v1.37.1"
     hooks:
       - id: yamllint
+  - repo: https://github.com/rhysd/actionlint
+    rev: v1.7.9
+    hooks:
+      - id: actionlint
+  - repo: https://github.com/scop/pre-commit-shfmt
+    rev: v3.12.0-2
+    hooks:
+      - id: shfmt
   - repo: https://github.com/shellcheck-py/shellcheck-py
     rev: "v0.11.0.1"
     hooks:
       - id: shellcheck
+  - repo: https://github.com/editorconfig-checker/editorconfig-checker
+    rev: v3.6.0
+    hooks:
+      - id: editorconfig-checker
+  - repo: https://github.com/zizmorcore/zizmor-pre-commit
+    rev: "v1.18.0"
+    hooks:
+      - id: zizmor
+        args: [--no-progress, --persona=pedantic, --fix]
