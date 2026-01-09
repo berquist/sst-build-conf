@@ -7,7 +7,7 @@ set -x
 
 set -eo pipefail
 
-SCRIPTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+SCRIPTDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "${SCRIPTDIR}"/compilers.bash
 
 toolchain="${1}"
@@ -34,10 +34,10 @@ pushd "${dir_build}"
 
 [ -n "${INTEL_PIN_DIRECTORY}" ] && PIN_TEXT="--with-pin=${INTEL_PIN_DIRECTORY}" || PIN_TEXT="--without-pin"
 INSTALL="$(command -v install) -p" "${dir_src}"/configure \
-       "${PIN_TEXT}" \
-       --with-python="${python_config_loc}" \
-       --with-sst-core="${dir_core}" \
-       --prefix="${dir_install}"
+    "${PIN_TEXT}" \
+    --with-python="${python_config_loc}" \
+    --with-sst-core="${dir_core}" \
+    --prefix="${dir_install}"
 
 bear_make_install
 ln -fsv "${dir_build}"/compile_commands.json "${dir_src}"/compile_commands.json

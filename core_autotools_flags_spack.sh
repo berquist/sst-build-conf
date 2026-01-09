@@ -7,7 +7,7 @@ set -x
 
 set -eo pipefail
 
-SCRIPTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+SCRIPTDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "${SCRIPTDIR}"/compilers.bash
 
 toolchain="${1}"
@@ -35,11 +35,11 @@ spack_tree="${SPACK_ENV}/.spack-env/view"
 # The Spack env bin/ is already on the PATH.
 export CPPFLAGS="-I${spack_tree}/include"
 INSTALL="$(command -v install) -p" "${dir_src}"/configure \
-       --prefix="${dir_install}" \
-       --with-hdf5="$(spack location -i hdf5)" \
-       --enable-event-tracking \
-       --enable-perf-tracking \
-       --enable-profile
+    --prefix="${dir_install}" \
+    --with-hdf5="$(spack location -i hdf5)" \
+    --enable-event-tracking \
+    --enable-perf-tracking \
+    --enable-profile
 
 bear_make_install
 ln -fsv "${dir_build}"/compile_commands.json "${dir_src}"/compile_commands.json

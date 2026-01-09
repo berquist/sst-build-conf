@@ -14,7 +14,7 @@ set -eo pipefail
 source_compilers_nompi() {
     local spack_compiler_spec="${1}"
 
-    SCRIPTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+    SCRIPTDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
     local compiler_paths
     compiler_paths="$(spack python "${SCRIPTDIR}"/spack_get_compilers.py --spec "${spack_compiler_spec}")"
@@ -77,7 +77,7 @@ if [[ -z "${INTEL_PIN_DIRECTORY}" ]]; then
 fi
 
 bear_make_install() {
-    if command -v bear >& /dev/null; then
+    if command -v bear >&/dev/null; then
         "$(command -v bear)" -- make install -j"$(nproc)"
     else
         make install -j"$(nproc)"

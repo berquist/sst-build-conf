@@ -7,7 +7,7 @@ set -x
 
 set -eo pipefail
 
-SCRIPTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+SCRIPTDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "${SCRIPTDIR}"/compilers.bash
 
 toolchain="${1}"
@@ -24,7 +24,7 @@ dir_install="${PWD}"/install_${suffix}
 # \rm -rf "${dir_install}" || true
 
 # linker problem
-    # -DSST_ENABLE_HDF5=ON \
+# -DSST_ENABLE_HDF5=ON \
 cmake \
     -GNinja \
     -DSST_ENABLE_EVENT_TRACKING=ON \

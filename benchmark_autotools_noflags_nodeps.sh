@@ -7,7 +7,7 @@ set -x
 
 set -eo pipefail
 
-SCRIPTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+SCRIPTDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "${SCRIPTDIR}"/compilers.bash
 
 toolchain="${1}"
@@ -33,8 +33,8 @@ mkdir -p "${dir_build}"
 pushd "${dir_build}"
 
 INSTALL="$(command -v install) -p" "${dir_src}"/configure \
-       --prefix="${dir_install}" \
-       --with-sst-core="${dir_core}"
+    --prefix="${dir_install}" \
+    --with-sst-core="${dir_core}"
 
 bear_make_install
 ln -fsv "${dir_build}"/compile_commands.json "${dir_src}"/compile_commands.json

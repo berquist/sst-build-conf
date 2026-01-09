@@ -7,7 +7,7 @@ set -x
 
 set -eo pipefail
 
-SCRIPTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+SCRIPTDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "${SCRIPTDIR}"/compilers.bash
 
 toolchain="${1}"

@@ -29,7 +29,7 @@ export MPI_CPPFLAGS
 pushd "${dir_build}"
 make clean
 make distclean || true
-    # --with-sst-elements="$("${SST_CONFIG}" SST_ELEMENT_LIBRARY SST_ELEMENT_LIBRARY_HOME)" \
+# --with-sst-elements="$("${SST_CONFIG}" SST_ELEMENT_LIBRARY SST_ELEMENT_LIBRARY_HOME)" \
 "${dir_src}"/configure \
     --with-sst-core="$("${SST_CONFIG}" --prefix)" \
     --with-sst-elements="$("${SST_CONFIG}" SST_ELEMENT_LIBRARY SST_ELEMENT_LIBRARY_SOURCE_ROOT)" \

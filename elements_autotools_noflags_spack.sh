@@ -7,7 +7,7 @@ set -x
 
 set -eo pipefail
 
-SCRIPTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+SCRIPTDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "${SCRIPTDIR}"/compilers.bash
 source "${SCRIPTDIR}"/spack_deps_elements.sh
 
@@ -49,13 +49,13 @@ pushd "${dir_build}"
 # --with-hybridsim="$(spack location -i hybridsim)" \
 
 INSTALL="$(command -v install) -p" "${dir_src}"/configure \
-       --prefix="${dir_install}" \
-       --with-dramsim="$(spack location -i dramsim2)" \
-       --with-goblin-hmcsim="$(spack location -i goblin-hmc-sim)" \
-       --with-hbmdramsim="$(spack location -i hbm-dramsim2)" \
-       --with-nvdimmsim="$(spack location -i nvdimmsim)" \
-       --with-ramulator="$(spack location -i ramulator)" \
-       --with-sst-core="${dir_core}"
+    --prefix="${dir_install}" \
+    --with-dramsim="$(spack location -i dramsim2)" \
+    --with-goblin-hmcsim="$(spack location -i goblin-hmc-sim)" \
+    --with-hbmdramsim="$(spack location -i hbm-dramsim2)" \
+    --with-nvdimmsim="$(spack location -i nvdimmsim)" \
+    --with-ramulator="$(spack location -i ramulator)" \
+    --with-sst-core="${dir_core}"
 
 bear_make_install
 ln -fsv "${dir_build}"/compile_commands.json "${dir_src}"/compile_commands.json
