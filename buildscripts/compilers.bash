@@ -98,7 +98,7 @@ max_cpus() {
     local cpu_count
     cpu_count="$(nproc)"
 
-    if (( cpu_count > max )); then
+    if ((cpu_count > max)); then
         echo "${max}"
     else
         echo "${cpu_count}"
@@ -106,7 +106,7 @@ max_cpus() {
 }
 
 bear_make_install() {
-    if command -v bear >& /dev/null; then
+    if command -v bear >&/dev/null; then
         "$(command -v bear)" -- make install -j"$(max_cpus)"
     else
         make install -j"$(max_cpus)"
