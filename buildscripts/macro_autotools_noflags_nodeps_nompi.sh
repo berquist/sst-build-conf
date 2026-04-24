@@ -17,8 +17,7 @@ source_compilers_nompi "${toolchain}"
 suffix="$(clean_suffix autotools_noflags_nodeps_nompi_${toolchain})"
 
 dir_src="${PWD}/sst-macro"
-#dir_build="${PWD}"/sst-macro-build-${suffix}
-dir_build="${dir_src}"
+dir_build="${PWD}"/sst-macro-build-${suffix}
 dir_install="${PWD}"/install_${suffix}
 
 #\rm -rf "${dir_build}" || true
