@@ -105,6 +105,14 @@ max_cpus() {
     fi
 }
 
+bear_make() {
+    if command -v bear >&/dev/null; then
+        "$(command -v bear)" -- make -j"$(max_cpus)"
+    else
+        make -j"$(max_cpus)"
+    fi
+}
+
 bear_make_install() {
     if command -v bear >&/dev/null; then
         "$(command -v bear)" -- make install -j"$(max_cpus)"
