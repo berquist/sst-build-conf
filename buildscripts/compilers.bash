@@ -69,7 +69,7 @@ fi
 # Handle the case where the Pin binary is on the path but the SST-specific
 # environment variable needed for the compile and link lines isn't present.
 if [[ -z "${INTEL_PIN_DIRECTORY}" ]]; then
-    pinloc="$(command -v pin)"
+    pinloc="$(command -v pin || true)"
     if [[ -n "${pinloc}" ]]; then
         INTEL_PIN_DIRECTORY="$(dirname "$(dirname "${pinloc}")")"
         export INTEL_PIN_DIRECTORY
