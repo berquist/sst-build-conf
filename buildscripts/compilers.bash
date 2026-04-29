@@ -114,9 +114,6 @@ bear_make() {
 }
 
 bear_make_install() {
-    if command -v bear >&/dev/null; then
-        "$(command -v bear)" -- make install -j"$(max_cpus)"
-    else
-        make install -j"$(max_cpus)"
-    fi
+    bear_make
+    make install -j"$(max_cpus)"
 }
