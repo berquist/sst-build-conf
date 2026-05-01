@@ -34,12 +34,19 @@ git clean -Xdf .
 # mkdir -p "${dir_build}"
 # pushd "${dir_build}"
 
+# TODO errors in subshells aren't propagated
+
 pushd asm
-bear_make
+(
+    # shellcheck disable=SC2030
+    export PATH="${dir_install}/bin:${PATH}"
+    bear_make
+)
 popd
 
 pushd src
 (
+    # shellcheck disable=SC2031
     export PATH="${dir_install}/bin:${PATH}"
     bear_make
     # Unlike the other build scripts, run the tests because they're so cheap.
