@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # core_cmake_noflags_nodeps.sh: Compile and install core, using the CMake
 # build system, without explicitly specifying any additional build

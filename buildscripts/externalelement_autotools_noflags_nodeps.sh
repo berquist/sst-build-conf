@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # externalelement_autotools_noflags_nodeps.sh: Compile and install juno, using
 # the Autotools build system, without explicitly specifying any additional

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 platform=$(uname)
 case "${platform}" in

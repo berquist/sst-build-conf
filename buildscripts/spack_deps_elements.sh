@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # limitations:
 #   - can't specify versions of dependencies: you must only have one visible of each to Spack

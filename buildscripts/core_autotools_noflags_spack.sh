@@ -1,4 +1,7 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
+# core_autotools_noflags_spack.sh: Compile and install core, using the
+# Autotools build system, with optional dependencies provided by Spack.
 
 # shellcheck disable=SC2086
 # https://web.archive.org/web/20230401201759/https://wiki.bash-hackers.org/scripting/debuggingtips#making_xtrace_more_useful
@@ -36,6 +39,8 @@ INSTALL="$(command -v install) -p" "${dir_src}"/configure \
 
 bear_make_install
 ln -fsv "${dir_build}"/compile_commands.json "${dir_src}"/compile_commands.json
+# no installation available
+# make html
 
 # To run, you *must* do `spack load hdf5`, otherwise the rpath for HDF5 in
 # sstsim.x won't be set properly.
