@@ -22,7 +22,7 @@ dir_build="${PWD}"/sst-elements-build-${suffix}
 dir_core="${PWD}"/install_${suffix}
 dir_install="${dir_core}"
 
-# \rm -rf "${dir_build}" || true
+\rm -rf "${dir_build}" || true
 # \rm -rf "${dir_install}" || true
 
 pushd "${dir_src}"
@@ -33,28 +33,26 @@ popd
 mkdir -p "${dir_build}"
 pushd "${dir_build}"
 
-# problems with dependency installation
-# --with-otf="$(spack location -i otf)" \
-# --with-fdsim="$(spack location -i flashdimmsim)"
-
 # doesn't compile at all?
 # --with-dumpi="$(spack location -i sst-dumpi)" \
-# --with-otf2="$(spack location -i otf2)" \
-# --with-llvm="$(spack location -i llvm)" \
-
-# doesn't compile on macOS
-# --with-pin="$(spack location -i intel-pin)" \
 
 # problem with env view
 # --with-hybridsim="$(spack location -i hybridsim)" \
 
+[ -n "${INTEL_PIN_DIRECTORY}" ] && PIN_TEXT="--with-pin=$(spack location -i intel-pin)" || PIN_TEXT="--without-pin"
 INSTALL="$(command -v install) -p" "${dir_src}"/configure \
+    --with-python="${python_config_loc}" \
     --prefix="${dir_install}" \
     --with-dramsim="$(spack location -i dramsim2)" \
     --with-goblin-hmcsim="$(spack location -i goblin-hmc-sim)" \
     --with-hbmdramsim="$(spack location -i hbm-dramsim2)" \
     --with-nvdimmsim="$(spack location -i nvdimmsim)" \
     --with-ramulator="$(spack location -i ramulator)" \
+    --with-fdsim="$(spack location -i flashdimmsim)" \
+    --with-otf="$(spack location -i otf)" \
+    --with-otf2="$(spack location -i otf2)" \
+    "${PIN_TEXT}" \
+    --with-llvm="$(spack location -i llvm)" \
     --with-sst-core="${dir_core}"
 
 bear_make_install
