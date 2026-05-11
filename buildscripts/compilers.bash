@@ -37,7 +37,7 @@ source_compilers_mpi() {
     local ompi_version="4.1.8"
     local ompi_loc
     # shellcheck disable=SC2086
-    ompi_loc="$(spack location -i openmpi@${ompi_version} %${spack_compiler_spec})"
+    ompi_loc="$(spack location -i openmpi@${ompi_version} %c,cxx=${spack_compiler_spec})"
     export MPICC="${ompi_loc}"/bin/mpicc
     export MPICXX="${ompi_loc}"/bin/mpicxx
     export CPPFLAGS="-I${ompi_loc}/include"
