@@ -39,6 +39,19 @@ pushd "${dir_build}"
 # problem with env view
 # --with-hybridsim="$(spack location -i hybridsim)" \
 
+# removed
+# --with-nvdimmsim="$(spack location -i nvdimmsim)" \
+
+# problem with SST integration
+# --with-otf="$(spack location -i otf)" \
+
+# ???
+# --with-dramsim3="$(spack location -i dramsim3)" \
+
+# TODO remove dependence on INTEL_PIN_DIRECTORY and only depend on spack
+# commands; in the meantime, you need to do `export
+# INTEL_PIN_DIRECTORY="$(spack location -i intel-pin)"` or the empty string if
+# it's not available.
 [ -n "${INTEL_PIN_DIRECTORY}" ] && PIN_TEXT="--with-pin=$(spack location -i intel-pin)" || PIN_TEXT="--without-pin"
 INSTALL="$(command -v install) -p" "${dir_src}"/configure \
     --with-python="${python_config_loc}" \
@@ -46,10 +59,8 @@ INSTALL="$(command -v install) -p" "${dir_src}"/configure \
     --with-dramsim="$(spack location -i dramsim2)" \
     --with-goblin-hmcsim="$(spack location -i goblin-hmc-sim)" \
     --with-hbmdramsim="$(spack location -i hbm-dramsim2)" \
-    --with-nvdimmsim="$(spack location -i nvdimmsim)" \
     --with-ramulator="$(spack location -i ramulator)" \
     --with-fdsim="$(spack location -i flashdimmsim)" \
-    --with-otf="$(spack location -i otf)" \
     --with-otf2="$(spack location -i otf2)" \
     "${PIN_TEXT}" \
     --with-llvm="$(spack location -i llvm)" \
