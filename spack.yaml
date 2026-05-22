@@ -1,3 +1,4 @@
+---
 spack:
   view: false
   config:
@@ -14,18 +15,18 @@ spack:
   concretizer:
     unify: true
   specs:
-  - dramsim2
-  # - dramsim3
-  - flashdimmsim
-  - goblin-hmc-sim
-  - hbm-dramsim2
-  - intel-pin@3.31
-  - llvm@18
-  - nvdimmsim
-  - openmpi@4.1.8
-  - otf
-  - otf2
-  # ???
-  # - py-numpy ^openblas
-  - py-sympy
-  - ramulator
+    - dramsim2
+    # - dramsim3
+    - flashdimmsim
+    - goblin-hmc-sim
+    - hbm-dramsim2
+    - intel-pin@3.31
+    - llvm@18
+    - nvdimmsim
+    - openmpi@4.1.8
+    - otf
+    - otf2
+    # ???
+    # - py-numpy ^openblas
+    - py-sympy
+    - ramulator
