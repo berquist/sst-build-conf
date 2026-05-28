@@ -1,0 +1,32 @@
+---
+spack:
+  view: false
+  config:
+    install_tree:
+      padded_length: 128
+  mirrors:
+    github-container-registry:
+      url: oci://ghcr.io/berquist/sst-spack
+      signed: false
+      autopush: true
+      access_pair:
+        id_variable: SPACK_OCI_USERNAME
+        secret_variable: SPACK_OCI_PASSWORD
+  concretizer:
+    unify: true
+  specs:
+    - dramsim2
+    # - dramsim3
+    - flashdimmsim
+    - goblin-hmc-sim
+    - hbm-dramsim2
+    - intel-pin@3.31
+    - llvm@18
+    - nvdimmsim
+    - openmpi@4.1.8
+    - otf
+    - otf2
+    # ???
+    # - py-numpy ^openblas
+    - py-sympy
+    - ramulator
