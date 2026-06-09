@@ -1,13 +1,14 @@
 #!/usr/bin/env bash
 
 set -euo pipefail
+# shellcheck disable=SC2086
+# https://web.archive.org/web/20230401201759/https://wiki.bash-hackers.org/scripting/debuggingtips#making_xtrace_more_useful
+export PS4='+(${BASH_SOURCE}:${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
 set -x
 
 git submodule init external/epa-inst-libs
 git submodule update
 
-# SST_CONFIG=/home/ejberqu/development/forks/sst/install_autotools_noflags_nodeps_gcc8.5.0/bin/sst-config
-SST_CONFIG=/home/ejberqu/development/forks/sst/install_autotools_noflags_nodeps_modules/bin/sst-config
 SST_CONFIG="${1}"
 
 dir_src="${PWD}"
@@ -29,11 +30,13 @@ export MPI_CPPFLAGS
 pushd "${dir_build}"
 make clean
 make distclean || true
-# --with-sst-elements="$("${SST_CONFIG}" SST_ELEMENT_LIBRARY SST_ELEMENT_LIBRARY_HOME)" \
+loc_sst_core_install="$("${SST_CONFIG}" --prefix)"
+loc_sst_elements_source="$("${SST_CONFIG}" SST_ELEMENT_LIBRARY SST_ELEMENT_LIBRARY_SOURCE_ROOT)"
+# loc_sst_elements_source=/home/ejberqu/development/forks/sst/sst-elements
 "${dir_src}"/configure \
-    --with-sst-core="$("${SST_CONFIG}" --prefix)" \
-    --with-sst-elements="$("${SST_CONFIG}" SST_ELEMENT_LIBRARY SST_ELEMENT_LIBRARY_SOURCE_ROOT)" \
+    --with-sst-core="${loc_sst_core_install}" \
+    --with-sst-elements="${loc_sst_elements_source}" \
     --prefix="${dir_install}"
 # shellcheck disable=SC1091
 source "${dir_build}"/bashrc
-make all install
+make all
