@@ -15,10 +15,15 @@ dir_src="${PWD}"
 export PEBIL_ROOT="${dir_src}"
 # dir_build=${PWD}/build
 dir_build="${PWD}"
+# PEBIL doesn't install anything, but pass this to --prefix anyway
 dir_install="${PWD}"/install
 # rm -r "${dir_build}" || true
 rm -r "${dir_install}" || true
 
+CC="$("${SST_CONFIG}" --CC)"
+export CC
+CXX="$("${SST_CONFIG}" --CXX)"
+export CXX
 MPICC="$("${SST_CONFIG}" --MPICC)"
 export MPICC
 MPICXX="$("${SST_CONFIG}" --MPICXX)"
