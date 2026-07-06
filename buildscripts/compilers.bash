@@ -8,6 +8,30 @@
 
 set -eo pipefail
 
+# Use ccache if present on the PATH.  There are two primary ways to specify
+# the use of ccache:
+#
+# 1. Symlink gcc/clang/g++/clang++/... to `ccache` and place the directory
+# containing symlinks early on in the PATH.  Do not set CC/CXX/... explicitly
+# and instead let the build system search for compilers.
+#
+# 2. Prefix gcc/clang/g++/clang++/... calls with ccache, so `ccache gcc` etc.
+#
+# Because we use CC/CXX/... to control the compiler, and there are many
+# different compilers we may want to use, the use of the environment variables
+# is incompatible with symlinks, so we must use ccache in compiler launcher
+# mode.
+if command -v ccache >& /dev/null; then
+    compiler_prefix="ccache "
+    export CCACHE_DEBUG=1
+    CCACHE_DEBUGDIR="$(mktemp --directory ccache-debugdir.XXXXXXXXXX)"
+    export CCACHE_DEBUGDIR
+    CCACHE_LOGFILE="$(mktemp ccache-logfile.XXXXXXXXXX)"
+    export CCACHE_LOGFILE
+else
+    compiler_prefix=""
+fi
+
 # To use this, the desired compiler must be registered with Spack (shown under
 # `spack compilers`).  However, it is not `spack load`ed into the environment,
 # but only its CC and CXX paths exported.
@@ -18,8 +42,8 @@ source_compilers_nompi() {
 
     local compiler_paths
     compiler_paths="$(spack python "${SCRIPTDIR}"/spack_get_compilers.py --spec "${spack_compiler_spec}")"
-    CC="$(echo "${compiler_paths}" | jq -r .c)"
-    CXX="$(echo "${compiler_paths}" | jq -r .cxx)"
+    CC="${compiler_prefix}$(echo "${compiler_paths}" | jq -r .c)"
+    CXX="${compiler_prefix}$(echo "${compiler_paths}" | jq -r .cxx)"
 
     if [[ -n "${CLANG_LIBCXX}" ]]; then
         export CXXFLAGS="-stdlib=libc++"
@@ -38,8 +62,8 @@ source_compilers_mpi() {
     local ompi_loc
     # shellcheck disable=SC2086
     ompi_loc="$(spack location -i openmpi@${ompi_version} %c,cxx=${spack_compiler_spec})"
-    export MPICC="${ompi_loc}"/bin/mpicc
-    export MPICXX="${ompi_loc}"/bin/mpicxx
+    export MPICC="${compiler_prefix}${ompi_loc}"/bin/mpicc
+    export MPICXX="${compiler_prefix}${ompi_loc}"/bin/mpicxx
     export CPPFLAGS="-I${ompi_loc}/include"
 }
 
