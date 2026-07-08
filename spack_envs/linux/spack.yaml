@@ -26,7 +26,10 @@ spack:
     - openmpi@4.1.8
     - otf
     - otf2
-    # ???
-    # - py-numpy ^openblas
+    # doesn't exist yet
+    # - py-galois
+    - py-lit
+    - py-networkx
+    - py-numpy
     - py-sympy
     - ramulator
