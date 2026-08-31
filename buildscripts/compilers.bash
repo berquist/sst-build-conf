@@ -21,7 +21,7 @@ set -eo pipefail
 # different compilers we may want to use, the use of the environment variables
 # is incompatible with symlinks, so we must use ccache in compiler launcher
 # mode.
-if command -v ccache >& /dev/null; then
+if command -v ccache >&/dev/null; then
     compiler_prefix="ccache "
     export CCACHE_DEBUG=1
     CCACHE_DEBUGDIR="$(mktemp --directory ccache-debugdir.XXXXXXXXXX)"
