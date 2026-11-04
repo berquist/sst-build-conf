@@ -22,7 +22,7 @@ set -eo pipefail
 # is incompatible with symlinks, so we must use ccache in compiler launcher
 # mode.
 if command -v ccache >&/dev/null; then
-    compiler_prefix="ccache "
+    compiler_prefix="$(realpath "$(command -v ccache)") "
     export CCACHE_DEBUG=1
     CCACHE_DEBUGDIR="$(mktemp --directory ccache-debugdir.XXXXXXXXXX)"
     export CCACHE_DEBUGDIR
